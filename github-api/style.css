@@ -1,0 +1,15 @@
+.borderzero {
+    border: 0 none;
+}
+
+.container {
+    margin-top:20px;
+}
+
+#fullName {
+    margin-left:40px;
+}
+
+#bio {
+    margin-left: 40px;
+}
