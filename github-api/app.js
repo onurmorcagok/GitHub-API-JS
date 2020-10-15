@@ -28,6 +28,9 @@ function getData(event) {
         if (response.user.message === "Not Found") {
           ui.showError("Kullanıcı bulunamadı.");
         } else {
+          ui.addSearchedUserToUI(username);
+          Storage.addSearchedUserToStorage(username);
+
           ui.showUserInfos(response.user);
           ui.showRepoInfo(response.repo);
         }
@@ -39,6 +42,22 @@ function getData(event) {
   event.preventDefault();
 }
 
-function clearAllSearched() {}
+function clearAllSearched() {
 
-function getAllSearched() {}
+  if(confirm("Tüm kullanıcıları temizlemek istediğinize emin misiniz ?")){
+    Storage.clearAllSearchedUsersFromStorage();
+    ui.clearAllSearchedFromUI();
+  }
+
+}
+
+function getAllSearched() {
+  let users = Storage.getSearchedUsersFromStorage();
+
+  let result = "";
+  users.forEach((user) => {
+    result += `<li class="list-group-item">${user}</li>`;
+  });
+
+  lastUsers.innerHTML = result;
+}

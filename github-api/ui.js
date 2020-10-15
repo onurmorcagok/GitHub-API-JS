@@ -55,11 +55,11 @@ class UI {
   </div>`;
   }
 
-  showRepoInfo(repo){
-      this.repoDIV.innerHTML = "";
+  showRepoInfo(repo) {
+    this.repoDIV.innerHTML = "";
 
-      repo.forEach(repo => {
-          this.repoDIV.innerHTML += `
+    repo.forEach((repo) => {
+      this.repoDIV.innerHTML += `
           <div class="mb-2 card-body">
           <div class="row">
               <div class="col-md-2">
@@ -77,8 +77,28 @@ class UI {
               </div>
       </div>
 
-      </div>`
-      })
+      </div>`;
+    });
+  }
+
+  addSearchedUserToUI(username) {
+    let users = Storage.getSearchedUsersFromStorage();
+
+    if (users.indexOf(username) === -1) {
+      // <li class="list-group-item">asdaskdjkasjkşdjşasjd</li>
+
+      const li = document.createElement("li");
+      li.className = "list-group";
+      li.textContent = username;
+
+      this.lastUsers.appendChild(li);
+    }
+  }
+
+  clearAllSearchedFromUI() {
+    while (this.lastUsers.firstElementChild !== null) {
+      this.lastUsers.removeChild(this.lastUsers.firstElementChild);
+    }
   }
 
   showError(message) {
@@ -90,7 +110,7 @@ class UI {
     this.cardBody.appendChild(div);
 
     setTimeout(() => {
-        div.remove();
-    },1000);
+      div.remove();
+    }, 2000);
   }
 }
